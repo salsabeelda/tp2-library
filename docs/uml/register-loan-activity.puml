@@ -1,0 +1,56 @@
+
+@startuml
+
+|Librarian|
+start
+:Identify member by scanning card;
+
+if (Card readable?) then (yes)
+else (no)
+    :Enter member number;
+endif
+
+|System|
+:Display member information\nand current loans;
+:Check borrowing rights;
+
+if (Rights granted?) then (yes)
+
+    repeat
+        |Librarian|
+        :Scan copy barcode;
+
+        if (Barcode readable?) then (yes)
+        else (no)
+            :Enter inventory number;
+        endif
+
+        |System|
+        :Check copy availability\nand reservations;
+
+        if (Copy available and not reserved?) then (yes)
+            :Register loan with due date\n14 days later;
+            :Mark copy as borrowed;
+        else (no)
+            :Exception 5a - Refuse this copy;
+            :Display the reservation;
+        endif
+
+    repeat while (Another copy?) is (yes) not (no)
+
+    |Librarian|
+    :End the transaction;
+
+    |System|
+    :Print receipt with copies\nand their due dates;
+
+else (no)
+    :Exception 3a - Display reason;
+    :End use case without any loan;
+endif
+
+stop
+
+@enduml
+
+
