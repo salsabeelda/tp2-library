@@ -10,7 +10,7 @@ rectangle "ATM" {
     usecase "Check the balance" as Balance
 }
 
-Customer --> Withdraw
+Customer -- Withdraw
 Customer -- Balance
 
 @enduml
