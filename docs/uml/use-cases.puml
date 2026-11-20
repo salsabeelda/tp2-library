@@ -6,7 +6,7 @@ left to right direction
 actor User
 actor Member
 actor Librarian
-rectangle "Mail server" as Mail <<actor>>
+actor "Mail server" as Mail <<system>>
 
 ' Generalization
 User <|-- Member
@@ -18,7 +18,7 @@ rectangle "Library system" {
     usecase "Search the catalog" as Search
     usecase "Reserve a book" as Reserve
     usecase "Renew a loan" as Renew
-    usecase "Lend copies" as Lend
+    usecase "Register a loan" as Lend
     usecase "Check borrowing rights" as Check
 
     usecase Return as "Register a return
