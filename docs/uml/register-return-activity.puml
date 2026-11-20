@@ -1,4 +1,5 @@
 
+
 @startuml
 
 |Librarian|
@@ -7,24 +8,37 @@ start
 :Identify the copy;
 
 |System|
-:Retrieve the corresponding loan;
-:Close the loan;
-:Record the return;
+:Check if the copy is currently on loan;
 
-if (Returned late?) then (yes)
-    :Extension point: late return;
-    :Suspend the member;
-else (no)
-endif
+if (Copy currently on loan?) then (yes)
 
-if (Copy reserved for another member?) then (yes)
-    :Keep the copy aside;
-    :Notify the member who reserved it;
+    :Retrieve the corresponding loan;
+    :Close the loan;
+    :Record the return;
+
+    if (Returned late?) then (yes)
+        :Extension point: late return;
+        :Suspend the member;
+    else (no)
+    endif
+
+    if (Copy reserved for another member?) then (yes)
+        :Keep the copy aside;
+        :Notify the member who reserved it;
+    else (no)
+        :Make the copy available;
+    endif
+
+    |Librarian|
+    :Print the receipt;
+
 else (no)
-    :Make the copy available;
+    :Display error message;
+    stop
 endif
 
 stop
 
 @enduml
+
 
